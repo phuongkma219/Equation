@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Equation</string>
+    <string name="equation">Equation</string>
+    <string name="quadratic_equation">Quadratic Equation</string>
+    <string name="sysem_equation">Sysem Equation</string>
+    <string name="result">Result</string>
+    <string name="yes">Yes</string>
+    <string name="equation1">Equation 1:</string>
+    <string name="equation2">Equation 2 :</string>
+    <string name="equation3">Equation 3 :</string>
+    <string name="solve_the_equation">Solve the equation</string>
+    <string name="submit">Submit:</string>
+    <string name="h_s_a">Hệ số a</string>
+    <string name="h_s_b">Hệ số b</string>
+    <string name="h_s_c">Hệ số c</string>
+    <string name="h_s_d">Hệ số d</string>
+    <string name="pt1">a1 x + b1 y + c1 z =d1</string>
+    <string name="pt2">a2 x + b2 y + c2 z =d2</string>
+    <string name="pt3">a3 x + b3 y + c3 z =d3</string>
+    <string name="input_dialog">Input Dialog</string>
+    <string name="infinite_solution">Infinite Solution</string>
+    <string name="no_solution">No Solution</string>
+    <string name="home">Home</string>
+    <string name="error">Input Error</string>
+
+</resources>

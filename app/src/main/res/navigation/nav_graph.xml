@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragmentHome">
+
+    <fragment
+        android:id="@+id/fragmentHome"
+        android:name="com.example.equation.ui.home.FragmentHome"
+        android:label="FragmentHome" />
+    <fragment
+        android:id="@+id/quadraticEquationFragment"
+        android:name="com.example.equation.ui.quadratic.QuadraticEquationFragment"
+        android:label="QuadraticEquationFragment" />
+
+    <fragment
+        android:id="@+id/systemEquationFragment"
+        android:name="com.example.equation.ui.system_equation.SystemEquationFragment"
+        android:label="SystemEquationFragment" />
+
+    <action android:id="@+id/action_home_to_quadratic"
+        app:destination="@id/quadraticEquationFragment"/>
+
+    <action android:id="@+id/action_home_to_system_equation"
+        app:destination="@id/systemEquationFragment"/>
+</navigation>
