@@ -1,5 +1,6 @@
 package com.example.equation.ui.system_equation
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -15,63 +16,39 @@ import com.example.equation.utils.AlertDialogUtils
 import com.example.equation.utils.Constants
 import com.example.equation.utils.SendData
 
-class SystemEquationFragment:BaseWithVMFragment<FragmentSystemBinding,SystemEquationViewModel>() {
+class SystemEquationFragment:BaseWithVMFragment<FragmentSystemBinding,SystemEquationViewModel>(),
+    InputDialog.ISendData {
     override fun getLayout(): Int {
         return R.layout.fragment_system
     }
     companion object{
         private const val TAG = "SystemEquationFragment"
     }
+    private val arr = Array<DoubleArray>(3, { DoubleArray(4) })
 
     override fun initView() {
         (activity as AppCompatActivity?)!!.findViewById<Toolbar>(R.id.toolbar).title =
             resources.getString(R.string.sysem_equation)
         initViewModel()
-        val arr = Array<DoubleArray>(3, { DoubleArray(4) })
         SendData.getInstance().getLiveArr().observe(viewLifecycleOwner) {
 
-            if (it.systemDataType == SystemDataType.PT_ONE){
-                for (i in 0..it.data!!.size - 1) {
-                    arr[0][i] = it.data[i].toDouble()
-                }
-                binding.tvResultE1.text = "${it.data[0]}x + (${it.data[1]})y + (${it.data[2]})z = ${it.data[3]}"
-            }
-            else if (it.systemDataType == SystemDataType.PT_TWO){
-                for (i in 0..it.data!!.size - 1) {
-                    arr[1][i] = it.data[i].toDouble()
-                }
-                binding.tvResultE2.text = "${it.data[0]}x + (${it.data[1]})y + (${it.data[2]})z = ${it.data[3]}"
-            }
-            else if (it.systemDataType == SystemDataType.PT_THREE){
-                for (i in 0..it.data!!.size - 1) {
-                    arr[2][i] = it.data[i].toDouble()
-                }
-                binding.tvResultE3.text = "${it.data!![0]}x + (${it.data[1]})y + (${it.data[2]})z = ${it.data[3]}"
-                SendData.getInstance().getLiveArr().value = SystemEquation(SystemDataType.NULL,null)
 
-            }
 
         }
 
         binding.ivEditE1.setOnClickListener {
-            val inputDialog = InputDialog()
-            val bundle = Bundle()
-            bundle.putString(resources.getString(R.string.input_dialog), Constants.PT_ONE)
-            inputDialog.arguments = bundle
+            val inputDialog = InputDialog.create(this,Constants.PT_ONE)
+
             inputDialog.show(childFragmentManager, "InputDialog")
         }
         binding.ivEditE2.setOnClickListener {
-            val inputDialog = InputDialog()
-            val bundle = Bundle()
-            bundle.putString(resources.getString(R.string.input_dialog), Constants.PT_TWO)
-            inputDialog.arguments = bundle
+            val inputDialog = InputDialog.create(this,Constants.PT_TWO)
+
             inputDialog.show(childFragmentManager, "InputDialog")
         }
         binding.ivEditE3.setOnClickListener {
-            val inputDialog = InputDialog()
-            val bundle = Bundle()
-            bundle.putString(resources.getString(R.string.input_dialog), Constants.PT_THREE)
-            inputDialog.arguments = bundle
+            val inputDialog = InputDialog.create(this,Constants.PT_THREE)
+
             inputDialog.show(childFragmentManager, "InputDialog")
         }
         binding.btnResult.setOnClickListener {
@@ -106,6 +83,30 @@ class SystemEquationFragment:BaseWithVMFragment<FragmentSystemBinding,SystemEqua
                 }
                 else -> {}
             }
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun sendArr(array: SystemEquation) {
+
+        if (array.systemDataType == SystemDataType.PT_ONE){
+            for (i in 0..array.data!!.size - 1) {
+                arr[0][i] = array.data[i].toDouble()
+            }
+            binding.tvResultE1.text = "${array.data[0]}x + (${array.data[1]})y + (${array.data[2]})z = ${array.data[3]}"
+        }
+        else if (array.systemDataType == SystemDataType.PT_TWO){
+            for (i in 0..array.data!!.size - 1) {
+                arr[1][i] = array.data[i].toDouble()
+            }
+            binding.tvResultE2.text = "${array.data[0]}x + (${array.data[1]})y + (${array.data[2]})z = ${array.data[3]}"
+        }
+        else if (array.systemDataType == SystemDataType.PT_THREE){
+            for (i in 0..array.data!!.size - 1) {
+                arr[2][i] = array.data[i].toDouble()
+            }
+            binding.tvResultE3.text = "${array.data[0]}x + (${array.data[1]})y + (${array.data[2]})z = ${array.data[3]}"
+
         }
     }
 

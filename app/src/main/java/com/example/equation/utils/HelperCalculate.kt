@@ -1,12 +1,13 @@
 package com.example.equation.utils
 
+import kotlin.math.pow
 
 
 fun checkSquareRoot(x:Double,y:Double):Double{
         if (x > 0) {
-            return Math.pow(x, y)
+            return x.pow(y)
         }
-        return -1 * Math.pow(-x, y)
+        return -1 * (-x).pow(y)
     }
 fun determinantOfMatrix(mat: Array<DoubleArray>): Double {
     val ans: Double
